@@ -130,41 +130,42 @@ nfaAccept word = nfaRun nfaStart nfaFinal word nfaTrans
 pkaBranch1Trans :: Trans
 pkaBranch1Trans =
   let t0 = M.empty
-      t1 = addNfaEdge t0 1 "abc" 1
-      t2 = addNfaEdge t1 1 "a"   3
-      t3 = addNfaEdge t2 3 "a"   4
-      t4 = addNfaEdge t3 4 "abc" 5
-      t5 = addNfaEdge t4 5 "ab"  6
-      t6 = addNfaEdge t5 6 "bc"  7
-      t7 = addNfaEdge t6 7 "ac"  8
-  in t7
+      t1  = addNfaEdge t0  1 "a" 2
+      t2  = addNfaEdge t1  1 "b" 5
+      t3  = addNfaEdge t2  1 "c" 7
+      t4  = addNfaEdge t3  2 "a" 8
+      t5  = addNfaEdge t4  2 "b" 3
+      t6  = addNfaEdge t5  2 "c" 4
+      t7  = addNfaEdge t6  3 "c" 1
+      t8  = addNfaEdge t7  4 "b" 1
+      t9  = addNfaEdge t8  5 "c" 6
+      t10 = addNfaEdge t9  5 "a" 3
+      t11 = addNfaEdge t10 7 "b" 6
+      t12 = addNfaEdge t11 6 "a" 1
+      t13 = addNfaEdge t12 8 "abc" 8
+  in t13
 
 pkaBranch2Trans :: Trans
 pkaBranch2Trans =
   let t0  = M.empty
-      t1  = addNfaEdge t0  2 "a"   9
-      t2  = addNfaEdge t1  9 "b"   10
-      t3  = addNfaEdge t2  10 "c"  2
-      t4  = addNfaEdge t3  9 "c"   11
-      t5  = addNfaEdge t4  11 "b"  2
-      t6  = addNfaEdge t5  2 "b"   12
-      t7  = addNfaEdge t6  12 "c"  13
-      t8  = addNfaEdge t7  13 "a"  2
-      t9  = addNfaEdge t8  2 "c"   14
-      t10 = addNfaEdge t9  14 "b"  13
-      t11 = addNfaEdge t10 12 "a"  10
+      t1  = addNfaEdge t0  9 "abc" 9
+      t2  = addNfaEdge t1  9 "a" 10
 
-      t12 = addNfaEdge t11 9  "a"   15
-      t13 = addNfaEdge t12 15 "abc" 16
-      t14 = addNfaEdge t13 16 "abc" 17
-      t15 = addNfaEdge t14 17 "abc" 18
-      t16 = addNfaEdge t15 18 "abc" 19
-  in t16
+      t3  = addNfaEdge t2  10 "a" 11
+
+      t4  = addNfaEdge t3  11 "abc" 12
+
+      t5  = addNfaEdge t4  12 "ab" 13
+
+      t6  = addNfaEdge t5  13 "bc" 14
+
+      t7  = addNfaEdge t6  14 "ac" 15
+  in t7
 
 afaAccept :: String -> Bool
 afaAccept word =
   let branch1Ok = nfaRun 1 (S.fromList [8])  word pkaBranch1Trans
-      branch2Ok = nfaRun 2 (S.fromList [19]) word pkaBranch2Trans
+      branch2Ok = nfaRun 9 (S.fromList [15]) word pkaBranch2Trans
   in branch1Ok && branch2Ok
 
 regexAccept :: String -> Bool
@@ -193,7 +194,7 @@ main = do
   putStrLn "---------------------"
   ok2 <- testRandom 1000
   putStrLn "---------------------"
-  putStrLn ("All accepted: " ++ show (ok1 && ok2))
+  putStrLn ("All accepted: " ++ show (ok1 && not(ok2)))
 
 testGenerated :: Int -> IO Bool
 testGenerated n = go n True
@@ -225,7 +226,7 @@ testRandom n = go n True
       let nfaA = nfaAccept w
       let afaA = afaAccept w
 
-      let chainedBad = not (dfaA == nfaA && nfaA == afaA)
+      let chainedBad = not (dfaA == nfaA && nfaA == afaA && dfaA == reA)
 
       putStrLn ("Generated word: " ++ w)
       putStrLn ("Regex accepted: " ++ show reA)

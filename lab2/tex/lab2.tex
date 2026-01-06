@@ -329,7 +329,7 @@ $\varepsilon$ & 0 & 0 \\
 
 \subsection{Расширенное регулярное выражение}
 
-$\textasciicircum ((abc|bac|cba|bca|acb)^+)?aa.\left[ab\right]\left[bc\right]\left[ac\right]\$$
+$\textasciicircum ((a(bc|cb)|b(ac|ca)|cba)^+)?aa.(?! c).(?! a).(?! b).\$$
 
 Итерация Клини $(abc|bac|cba|bca|acb)^*$ -- это повторение несколько раз  блока $(abc|bac|cba|bca|acb)$ или $\varepsilon$. Поэтому можем представить повторение нескольких раз блока $(abc|bac|cba|bca|acb)$ в виде $(abc|bac|cba|bca|acb)^+$, а возможность получения $\varepsilon$ из итерации Клини -- так: $((abc|bac|cba|bca|acb)^+)?$.
 
@@ -339,3 +339,4 @@ $\textasciicircum ((abc|bac|cba|bca|acb)^+)?aa.\left[ab\right]\left[bc\right]\le
 Блоки $(a|b)$, $(b|c)$ и $(a|c)$ заменяем по определению на $\left[ab\right],\left[bc\right]$ и $\left[ac\right]$.
 
 \end{document}
+
