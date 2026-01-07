@@ -12,7 +12,7 @@ ba -> ac
 
 над множеством базисных слов $b^na^n$
 
-Язык L = \{$ {w | \exists  n: b^n a^n \rightarrow^* w} $\} 
+Язык L = \{ $ {w | \exists  n: b^n a^n \rightarrow^* w}$ \} 
 
 Из SRS имеем: $ba \rightarrow ac \rightarrow aa$
 Пусть h(a) = a, h($\gamma, \gamma \neq a) = \varepsilon$.
