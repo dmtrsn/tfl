@@ -131,41 +131,66 @@ pkaBranch1Trans :: Trans
 pkaBranch1Trans =
   let t0 = M.empty
       t1  = addNfaEdge t0  1 "a" 2
-      t2  = addNfaEdge t1  1 "b" 5
-      t3  = addNfaEdge t2  1 "c" 7
+      t2  = addNfaEdge t1  1 "b" 3
+      t3  = addNfaEdge t2  1 "c" 4
+      
       t4  = addNfaEdge t3  2 "a" 8
-      t5  = addNfaEdge t4  2 "b" 3
-      t6  = addNfaEdge t5  2 "c" 4
-      t7  = addNfaEdge t6  3 "c" 1
-      t8  = addNfaEdge t7  4 "b" 1
-      t9  = addNfaEdge t8  5 "c" 6
-      t10 = addNfaEdge t9  5 "a" 3
-      t11 = addNfaEdge t10 7 "b" 6
-      t12 = addNfaEdge t11 6 "a" 1
-      t13 = addNfaEdge t12 8 "abc" 8
-  in t13
+      t5  = addNfaEdge t4  2 "b" 6
+      t6  = addNfaEdge t5  2 "c" 5
+      
+      t7  = addNfaEdge t6  3 "a" 6
+      t8  = addNfaEdge t7  3 "c" 7
+      
+      t9  = addNfaEdge t8  4 "b" 7
+      
+      t10 = addNfaEdge t9  7 "a" 1
+      t11 = addNfaEdge t10 6 "c" 1
+      t12 = addNfaEdge t11 5 "b" 1
+      
+      t13 = addNfaEdge t12 8 "a" 8
+      t14 = addNfaEdge t13 8 "b" 8
+      t15 = addNfaEdge t14 8 "c" 8
+  in t15
 
 pkaBranch2Trans :: Trans
 pkaBranch2Trans =
   let t0  = M.empty
-      t1  = addNfaEdge t0  9 "abc" 9
-      t2  = addNfaEdge t1  9 "a" 10
-
-      t3  = addNfaEdge t2  10 "a" 11
-
-      t4  = addNfaEdge t3  11 "abc" 12
-
-      t5  = addNfaEdge t4  12 "ab" 13
-
-      t6  = addNfaEdge t5  13 "bc" 14
-
-      t7  = addNfaEdge t6  14 "ac" 15
-  in t7
+      t1  = addNfaEdge t0  9 "a" 10
+      
+      t2  = addNfaEdge t1  9 "b" 11
+      t3  = addNfaEdge t2  9 "c" 11
+      
+      t4  = addNfaEdge t3  10 "a" 13
+      
+      t5  = addNfaEdge t4  10 "b" 12
+      t6  = addNfaEdge t5  10 "c" 12
+      
+      t7  = addNfaEdge t6  11 "a" 12
+      t8  = addNfaEdge t7  11 "b" 12
+      t9  = addNfaEdge t8  11 "c" 12
+      
+      t10 = addNfaEdge t9  12 "a" 9
+      t11 = addNfaEdge t10 12 "b" 9
+      t12 = addNfaEdge t11 12 "c" 9
+      
+      t13 = addNfaEdge t12 13 "a" 14
+      t14 = addNfaEdge t13 13 "b" 14
+      t15 = addNfaEdge t14 13 "c" 14
+      
+      t16 = addNfaEdge t15 14 "a" 15
+      t17 = addNfaEdge t16 14 "b" 15
+      
+      t18 = addNfaEdge t17 15 "b" 16
+      t19 = addNfaEdge t18 15 "c" 16
+      
+      t20 = addNfaEdge t19 16 "a" 17
+      t21 = addNfaEdge t20 16 "c" 17
+  in t21
 
 afaAccept :: String -> Bool
 afaAccept word =
   let branch1Ok = nfaRun 1 (S.fromList [8])  word pkaBranch1Trans
-      branch2Ok = nfaRun 9 (S.fromList [15]) word pkaBranch2Trans
+      branch2Ok = nfaRun 9 (S.fromList [17]) word pkaBranch2Trans
   in branch1Ok && branch2Ok
 
 regexAccept :: String -> Bool
@@ -194,7 +219,7 @@ main = do
   putStrLn "---------------------"
   ok2 <- testRandom 1000
   putStrLn "---------------------"
-  putStrLn ("All accepted: " ++ show (ok1 && not(ok2)))
+  putStrLn ("All accepted: " ++ show (ok1 && ok2))
 
 testGenerated :: Int -> IO Bool
 testGenerated n = go n True
@@ -226,7 +251,7 @@ testRandom n = go n True
       let nfaA = nfaAccept w
       let afaA = afaAccept w
 
-      let chainedBad = not (dfaA == nfaA && nfaA == afaA && dfaA == reA)
+      let chainedBad = not (dfaA == nfaA && nfaA == afaA && afaA == reA)
 
       putStrLn ("Generated word: " ++ w)
       putStrLn ("Regex accepted: " ++ show reA)
