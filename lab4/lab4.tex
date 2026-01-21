@@ -1,0 +1,244 @@
+\documentclass[a4paper, 14pt]{extarticle}
+
+% Поля
+%--------------------------------------
+\usepackage{geometry}
+\geometry{a4paper,tmargin=2cm,bmargin=2cm,lmargin=3cm,rmargin=1cm}
+%--------------------------------------
+
+
+%Russian-specific packages
+%--------------------------------------
+\usepackage[T2A]{fontenc}
+\usepackage[utf8]{inputenc} 
+\usepackage[english, main=russian]{babel}
+%--------------------------------------
+
+\usepackage{textcomp}
+
+% Красная строка
+%--------------------------------------
+\usepackage{indentfirst}               
+%--------------------------------------             
+
+\newcommand{\T}{\mathcal{T}}
+
+%Graphics
+%--------------------------------------
+\usepackage{graphicx}
+\graphicspath{ {./images/} }
+\usepackage{wrapfig}
+%--------------------------------------
+
+% Полуторный интервал
+%--------------------------------------
+\linespread{1.3}                    
+%--------------------------------------
+
+%Выравнивание и переносы
+%--------------------------------------
+% Избавляемся от переполнений
+\sloppy
+% Запрещаем разрыв страницы после первой строки абзаца
+\clubpenalty=10000
+% Запрещаем разрыв страницы после последней строки абзаца
+\widowpenalty=10000
+%--------------------------------------
+
+%Списки
+\usepackage{enumitem}
+
+%Подписи
+\usepackage{caption} 
+
+%Гиперссылки
+\usepackage{hyperref}
+
+\hypersetup {
+	unicode=true
+}
+
+%Рисунки
+%--------------------------------------
+\DeclareCaptionLabelSeparator*{emdash}{~--- }
+\captionsetup[figure]{labelsep=emdash,font=onehalfspacing,position=bottom}
+%--------------------------------------
+
+\usepackage{tempora}
+
+
+%Листинги
+%--------------------------------------
+\usepackage{listings}
+\lstset{
+  basicstyle=\ttfamily\footnotesize, 
+  %basicstyle=\footnotesize\AnkaCoder,        % the size of the fonts that are used for the code
+  breakatwhitespace=false,         % sets if automatic breaks shoulbd only happen at whitespace
+  breaklines=true,                 % sets automatic line breaking
+  captionpos=t,                    % sets the caption-position to bottom
+  inputencoding=utf8,
+  frame=single,                    % adds a frame around the code
+  keepspaces=true,                 % keeps spaces in text, useful for keeping indentation of code (possibly needs columns=flexible)
+  keywordstyle=\bf,       % keyword style
+  numbers=left,                    % where to put the line-numbers; possible values are (none, left, right)
+  numbersep=5pt,                   % how far the line-numbers are from the code
+  xleftmargin=25pt,
+  xrightmargin=25pt,
+  showspaces=false,                % show spaces everywhere adding particular underscores; it overrides 'showstringspaces'
+  showstringspaces=false,          % underline spaces within strings only
+  showtabs=false,                  % show tabs within strings adding particular underscores
+  stepnumber=1,                    % the step between two line-numbers. If it's 1, each line will be numbered
+  tabsize=2,                       % sets default tabsize to 8 spaces
+  title=\lstname                   % show the filename of files included with \lstinputlisting; also try caption instead of title
+}
+
+%--------------------------------------
+
+%%% Математические пакеты %%%
+%--------------------------------------
+\usepackage{amsthm,amsfonts,amsmath,amssymb,amscd}  % Математические дополнения от AMS
+\usepackage{mathtools}                              % Добавляет окружение multlined
+\usepackage[perpage]{footmisc}
+%--------------------------------------
+
+%--------------------------------------
+%			НАЧАЛО ДОКУМЕНТА
+%--------------------------------------
+
+\begin{document}
+
+%--------------------------------------
+%			ТИТУЛЬНЫЙ ЛИСТ
+%--------------------------------------
+\begin{titlepage}
+\thispagestyle{empty}
+\newpage
+
+
+%Шапка титульного листа
+%--------------------------------------
+\vspace*{-60pt}
+\hspace{-65pt}
+\begin{minipage}{0.3\textwidth}
+\hspace*{-20pt}\centering
+\includegraphics[width=\textwidth]{emblem}
+\end{minipage}
+\begin{minipage}{0.67\textwidth}\small \textbf{
+\vspace*{-0.7ex}
+\hspace*{-6pt}\centerline{Министерство науки и высшего образования Российской Федерации}
+\vspace*{-0.7ex}
+\centerline{Федеральное государственное бюджетное образовательное учреждение }
+\vspace*{-0.7ex}
+\centerline{высшего образования}
+\vspace*{-0.7ex}
+\centerline{<<Московский государственный технический университет}
+\vspace*{-0.7ex}
+\centerline{имени Н.Э. Баумана}
+\vspace*{-0.7ex}
+\centerline{(национальный исследовательский университет)>>}
+\vspace*{-0.7ex}
+\centerline{(МГТУ им. Н.Э. Баумана)}}
+\end{minipage}
+%--------------------------------------
+
+%Полосы
+%--------------------------------------
+\vspace{-25pt}
+\hspace{-35pt}\rule{\textwidth}{2.3pt}
+
+\vspace*{-20.3pt}
+\hspace{-35pt}\rule{\textwidth}{0.4pt}
+%--------------------------------------
+
+\vspace{1.5ex}
+\hspace{-35pt} \noindent \small ФАКУЛЬТЕТ\hspace{80pt} <<Информатика и системы управления>>
+
+\vspace*{-16pt}
+\hspace{47pt}\rule{0.83\textwidth}{0.4pt}
+
+\vspace{0.5ex}
+\hspace{-35pt} \noindent \small КАФЕДРА\hspace{50pt} <<Теоретическая информатика и компьютерные технологии>>
+
+\vspace*{-16pt}
+\hspace{30pt}\rule{0.866\textwidth}{0.4pt}
+  
+\vspace{11em}
+
+\begin{center}
+\Large {\bf Лабораторная работа № 4} \\ 
+\large {\bf по курсу <<Теория формальных языков>>} \\
+% \large «Моделирование данных с использованием модели семантических объектов» 
+\end{center}\normalsize
+
+\vspace{8em}
+
+
+\begin{flushright}
+  {Студент группы ИУ9-51Б Санталов Д.А. \hspace*{15pt}\\ 
+  \vspace{2ex}
+  Преподаватель Непейвода А. Н.\hspace*{15pt}}
+\end{flushright}
+
+\bigskip
+
+\vfill
+ 
+
+\begin{center}
+\textsl{Москва 2025}
+\end{center}
+\end{titlepage}
+%--------------------------------------
+%		КОНЕЦ ТИТУЛЬНОГО ЛИСТА
+%--------------------------------------
+
+\renewcommand{\ttdefault}{pcr}
+
+\setlength{\tabcolsep}{3pt}
+\newpage
+\setcounter{page}{2}
+
+% Оглавление
+\tableofcontents
+\newpage
+
+\section{Постановка задачи}\label{Sect::task}
+По имеющейся атрибутной грамматике выполнить следующие задания:
+\begin{enumerate}
+    \item Проанализировать язык на КС-свойство, в случае его наличия — на регулярность.
+    \item Построить "наивный"парсер слов для языка, используя рекурсивный разбор с возвратами. Парсер не должен зацикливаться.
+    \item Построить оптимизированный парсер слов для языка. Оценить сверху его вычислительную сложность..
+    \item Посредством фазз-тестирования проверить эквивалентность парсеров и построить сравнительные графики скорости их работы на случайных словах, принадлежащих языку, и не принадлежащих языку (два тестовых пула).
+
+    Грамматика: 
+
+    $S \rightarrow aSa \; \; \; \;\; \; \; \;\; \; \; \; S_0.v := S_1.v\cdot2$
+
+    $S \rightarrow TT \; \; \; \;\; \; \; \;\; \; \; \;\;  T_1.v == T_2.v \cdot 2^k, S_v := T_1.v$
+
+    $T \rightarrow bTb \; \; \; \;\; \; \; \;\; \; \; \; T_0.v := T_1.v+3$
+
+    $T \rightarrow SS \; \; \; \;\; \; \; \;\; \; \; \;\; T.v := S_1.v \cdot S_2.v + 1$
+
+    $T \rightarrow a \; \; \; \;\; \; \; \;\; \; \; \;\;\;\;\; T.v := 1$
+
+    $S \rightarrow b \; \; \; \;\; \; \; \;\; \; \; \;\;\;\;\; S.v := 2$
+\end{enumerate}
+
+\clearpage
+\section{Основная часть}\label{Sect::realisation}
+
+\subsection{КС-свойство}
+
+Пусть L - исходный язык. Рассмотрим $L_0 = L \cap b^+ab^+a = b^mab^na$, где $m,n = \frac{4^t-1}{3}$. 
+
+Выберем $\frac{4^{t-1} - 1}{3} > p$. Пусть $k_t = \frac{4^t-1}{3}$. Рассмотрим слово $z = b^kab^ka = uvwxy$. Так как $k>p$, то $vwx$ не захватывает обе буквы $a$, $|vwx|\leq p$. Если $vwx$ не содержит ни одной буквы $a$, то $uv^0wx^0y$ дает из исходного слова $b^{k-d}ab^ka$ или $b^kab^{k-d}a$. Поскольку $1\leq d \leq p < 4^{t-1}$, то так как $k_{t-1} = k_t - 4^{t-1} < k_t - d < k_t$, но при возрастании $t$ возрастает и $\frac{4^t-1}{3}$, следовательно, $uv^0wx^0y \notin L_0$.
+
+Если же $vwx$ содержит букву $a$, то если $a$ лежит в $v$ или $x$, то при накачке $uv^0wx^0y$ получим, что буква $a$ удаляется и полученное слово не принадлежит языку. Если же буква $a$ лежит в $w$, то получаем случай, аналогичный предыдущему: $b^{k-d_1}ab^{k-d_2}a \notin L_0$ ($d_1 + d_2 \leq p$).
+Следовательно, по лемме о накачке данный язык не является контекстно-свободным.
+\subsection{Оптимизированный парсер}
+
+Сложность: $O(n^2)$
+
+\end{document}
+
