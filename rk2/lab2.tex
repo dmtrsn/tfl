@@ -216,10 +216,20 @@ ba $\rightarrow$ ac
 
 Язык L = $\{w \, | \, \exists \; n: b^n a^n \rightarrow^* w \}$
 
+
+Инварианты для данного языка:
+\begin{enumerate}
+    \item все слова имеют четную длину
+    \item слово никогда не начинается на $c$
+    \item невозможен префикс вида $b\ldots b c \ldots$, то есть перед блоком $c$ стоит минимум одна $a$.
+\end{enumerate}
+
+Рассмотрим обратную задачу: требуется выяснить, можно ли данное слово при помощи правил $bab \to a, ac \to ba, aa \to ac$ свести к словам вида $b^na^n$. Т.к. любое слово вида $b^na^n$, $n > 2$ можно свести данными правилами к $bbaa$, то существует 2 случая: принадлежащее языку слово сводится к $ba$ или к $bbaa$. 
+
 Язык является контекстно-свободным.
 
-\begin{figure}[h]
-\    \includegraphics[width=\textwidth]{images/pda.png}
+\begin{figure}[h] 
+\    \includegraphics[width=\textwidth]{images/pda.png} 
 \end{figure}
 
 Рассмотрим $b^{2p}a^{2p}$. Пусть длина накачки - $p$. $|xy| \leq p \Rightarrow y$ содержится в $b^{2p}$. Тогда $xy^kz$ - это $b^{2p+i}a^{2p}$. Количество $b$ больше, чем количество $a \Rightarrow xy^kz$ не принадлежит языку $\Rightarrow$ язык нерегулярен.
@@ -244,3 +254,4 @@ $L(T) = (a|b)^*bb$, атрибут a считает число букв a в с�
 Предикат из $S \rightarrow SSS$ не исключает ни одного слова $\omega \in L(T)$. Кроме того, все выводы из S дают слова, оканчивающиеся на $bb$, то есть $L(S) \subseteq (a|b)^*bb$. Таким образом, $L(S) = (a|b)^*bb \Rightarrow$ язык КС и регулярный.
 
 \end{document}
+
