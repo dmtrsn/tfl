@@ -1,0 +1,29 @@
+digraph AFA {
+  rankdir=LR;
+    ranksep=1.2;
+  nodesep=0.8;
+  node [shape=circle];
+
+dummy [label = "", shape = none]
+dummy -> qI
+  qI [shape=circle,label=""];
+    3 [shape=doublecircle,label="3"];
+    6 [shape=doublecircle,label="6"];
+
+  qI->1 [shape=circle,label="a, z0/Az0, A/AA, B/e"]
+  qI->qI [shape=circle,label="b, z0/Bz0, B/BB, A/e"]
+  1->qI [shape=circle,label="b, z0/Bz0, B/BB, A/e"]
+  1 -> 2 [shape=circle,label="c, z0/Az0, A/AA, B/e"]
+  2 -> 2 [shape=circle,label="c, z0/Az0, A/AA, B/e"]
+  2 -> qI [shape=circle,label="b, z0/Bz0, B/BB, A/e"]
+  2-> 3 [shape=doublecircle,label="$, z0/z0"]
+  1 -> 3 [shape=doublecircle,label="$, z0/z0"]
+  qI -> 3 [shape=doublecircle,label="$, z0/z0"]
+  qI -> 4 [shape=doublecircle,label="$, x/e"]
+  1 -> 4 [shape=doublecircle,label="$, x/e"]
+  2 -> 4 [shape=doublecircle,label="$, x/e"]
+  4 -> 5 [shape=doublecircle,label="$, x/e"]
+  5 -> 4 [shape=doublecircle,label="$, x/e"]
+  5 -> 6 [shape=doublecircle,label="e, z0/z0"]
+}
+
